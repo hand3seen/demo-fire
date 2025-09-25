@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Headmosh — Visual Draft Demo</title>
+  <style>
+    html,body{margin:0;height:100%;background:#000;font:14px/1.4 system-ui,Segoe UI,Roboto,Inter,Arial;color:#fff;overflow:hidden}
+    /* UI Panel */
+    #ui{position:fixed;left:12px;top:12px;z-index:20;display:flex;gap:8px;align-items:center;
+        background:rgba(0,0,0,.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.15);
+        border-radius:12px;padding:10px}
+    select,button{padding:8px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.06);color:#fff;cursor:pointer}
+    select:hover,button:hover{border-color:rgba(255,255,255,.55)}
+    #barWrap{height:8px;width:160px;background:#222;border:1px solid #444;border-radius:999px;overflow:hidden}
+    #bar{height:100%;width:0%;background:linear-gradient(90deg,#4dd2ff,#7CFC00)}
+    .pill{border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:2px 8px;opacity:.9}
+    #status{opacity:.8;margin-left:6px}
+    /* Stream overlay bits */
+    .lower-third{position:fixed;left:24px;bottom:24px;z-index:15;background:rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:10px 14px}
+    .ticker{position:fixed;left:0;right:0;bottom:0;height:30px;background:rgba(0,0,0,0.6);
+      border-top:1px solid rgba(255,255,255,.2);display:flex;align-items:center;overflow:hidden;z-index:12}
+    .ticker .track{white-space:nowrap;animation:scroll 16s linear infinite;opacity:.9}
+    .badge{display:inline-block;margin:0 14px;padding:3px 8px;border:1px solid rgba(255,255,255,.3);
+      border-radius:999px;font-size:12px}
+    @keyframes scroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+    .logo{position:fixed;right:24px;top:24px;z-index:15;opacity:.9}
+    .logo .mark{font-weight:800;letter-spacing:.08em;font-size:13px;border:1px solid rgba(255,255,255,.25);
+      padding:6px 9px;border-radius:10px;background:rgba(0,0,0,.5)}
+    /* Drop animation */
+    #drop{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.5);
+      padding:14px 18px;border:2px solid #ffc600;border-radius:16px;background:rgba(0,0,0,.75);
+      z-index:30;display:none;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+    #drop.show{display:block;animation:pop 1s ease-out forwards}
+    @keyframes pop{0%{transform:translate(-50%,-50%) scale(.5);opacity:0}60%{transform:translate(-50%,-50%) scale(1.05);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+  </style>
+</head>
+<body>
+  <!-- UI -->
+  <div id="ui">
+    <select id="mic"></select>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <div id="barWrap"><div id="bar"></div></div>
+    <span class="pill" id="pill-bass">bass 0.00</span>
+    <span class="pill" id="pill-mids">mids 0.00</span>
+    <span class="pill" id="pill-highs">highs 0.00</span>
+    <span id="status">idle</span>
+    <span style="margin-left:8px;opacity:.7">Mock chat:</span>
+    <button id="bZap">!zap</button>
+    <button id="bMosh">!mosh</button>
+    <button id="bPalette">!palette neon</button>
+    <button id="bDrop">!drop</button>
+  </div>
+
+  <!-- Overlay -->
+  <div class="logo"><div class="mark">HEADMOSH STUDIO — LIVE</div></div>
+  <div class="lower-third">⚡ “Powering the Portal” — buy-in, draw prompts, drop your wallet, vibe with the wolves.</div>
+  <div id="drop">🎁 Giveaway Drop Incoming…</div>
+  <div class="ticker"><div class="track">
+    <span class="badge">!zap</span> Add sparks ·
+    <span class="badge">!mosh</span> Bass burst ·
+    <span class="badge">!palette neon</span> Switch theme ·
+    <span class="badge">!drop</span> Giveaway ·
+    Headmosh Portal opens at 100% · Follow @headmosh
+  </div></div>
+
+  <!-- p5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="audio.js"></script>
+  <script src="viz.js"></script>
+  <script src="demo-mock.js"></script>
+</body>
+</html>
