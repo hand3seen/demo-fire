@@ -37,7 +37,7 @@ function draw(){
 
   // Burst multiplies mids/highs temporarily
   const burst = max(0, burstTicks/60.0);
-  const mag = 0.10 + (bass * 0.2) + burst*1;
+  const mag = 0.30 + (bass * 0.4) + burst*3;
   const incBoost = 0.06 + (mids * 0.30) + burst*0.05;
   const zBoost = 0.00015 + (mids * 0.001) + burst*0.0006;
   const highlight = highs + burst*0.4;
