@@ -75,7 +75,7 @@ function Particle(){
   this.pos=createVector(random(width),random(height));
   this.vel=createVector(0,0);
   this.acc=createVector(0,0);
-  this.maxspeed=2.0;
+  this.maxspeed=0.2;
   this.prevPos=this.pos.copy();
   this.reactEnergy=0; this.reactBands={bass:0,mids:0,highs:0};
 
