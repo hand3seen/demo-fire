@@ -17,7 +17,7 @@ function setup(){
   createCanvas(window.innerWidth, window.innerHeight);
   cols=floor(width/scl); rows=floor(height/scl);
   flowfield = new Array(cols*rows);
-  for (var i=0;i<10;i++) particles[i]=new Particle();
+  for (var i=0;i<30;i++) particles[i]=new Particle();
   background(pal().bg);
 }
 
@@ -37,7 +37,7 @@ function draw(){
 
   // Burst multiplies mids/highs temporarily
   const burst = max(0, burstTicks/60.0);
-  const mag = 0.30 + (bass * 0.4) + burst*3;
+  const mag = 0.70 + (bass * 0.7) + burst*3;
   const incBoost = 0.06 + (mids * 0.30) + burst*0.05;
   const zBoost = 0.00015 + (mids * 0.001) + burst*0.0006;
   const highlight = highs + burst*0.4;
@@ -47,7 +47,7 @@ function draw(){
     var xoff=0;
     for (var x=0;x<cols;x++){
       var index=x+y*cols;
-      var angle=noise(xoff,yoff,zoff)*TWO_PI*3;
+      var angle=noise(xoff,yoff,zoff)*TWO_PI*7;
       var v=p5.Vector.fromAngle(angle);
       v.setMag(mag);
       flowfield[index]=v;
